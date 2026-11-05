@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ARDOR — Specialty Coffee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+<style>
+  :root {
+    --black: #0C0C0A;
+    --surface: #131310;
+    --border: #242420;
+    --sage: #7A9E87;
+    --sage-dim: #3D5C47;
+    --cream: #E6DDD0;
+    --cream-dim: #8A8278;
+    --white: #F2EDE6;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 48px;
+    background: transparent;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: var(--cream-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--sage);
+    text-decoration: none;
+    border-bottom: 1px solid var(--sage-dim);
+    padding-bottom: 2px;
+    transition: all 0.2s;
+  }
+
+  .nav-cta:hover { color: var(--white); border-color: var(--white); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    top: 50%;
+    left: -2%;
+    transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(180px, 22vw, 320px);
+    font-weight: 300;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--border);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-left {
+    padding: 160px 48px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--sage);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--sage);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(64px, 7vw, 110px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 40px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--cream-dim);
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--cream-dim);
+    max-width: 340px;
+    margin-bottom: 52px;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 16px 36px;
+    background: var(--sage);
+    color: var(--black);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--white); transform: translateY(-1px); }
+
+  .btn-ghost {
+    font-size: 13px;
+    color: var(--cream-dim);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover { color: var(--cream); border-color: var(--cream-dim); }
+
+  .hero-right {
+    position: relative;
+    z-index: 2;
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 80px 48px;
+  }
+
+  .hero-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--cream-dim);
+  }
+
+  .hero-visual {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+  }
+
+  .coffee-cup-svg {
+    width: 220px;
+    opacity: 0.9;
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-band {
+    overflow: hidden;
+    background: var(--sage);
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 0;
+    animation: marquee 22s linear infinite;
+    width: max-content;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .marquee-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--black);
+    white-space: nowrap;
+    padding: 0 40px;
+  }
+
+  .marquee-dot {
+    color: var(--black);
+    opacity: 0.4;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { border-bottom: 1px solid var(--border); }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 60px 48px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--sage);
+    letter-spacing: 0.15em;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .section-link {
+    font-size: 12px;
+    color: var(--sage);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--sage-dim);
+    padding-bottom: 2px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .section-link:hover { color: var(--white); }
+
+  /* ── PRODUCTS ── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .product-card {
+    border-right: 1px solid var(--border);
+    padding: 48px;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+  }
+
+  .product-card:last-child { border-right: none; }
+  .product-card:hover { background: var(--surface); }
+
+  .product-visual {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-visual svg {
+    width: 70%;
+    height: 70%;
+    opacity: 0.85;
+  }
+
+  .product-origin {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--sage);
+    margin-bottom: 10px;
+  }
+
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+  .product-variety {
+    font-size: 13px;
+    color: var(--cream-dim);
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+
+  .product-notes {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .note-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    color: var(--cream-dim);
+    letter-spacing: 0.08em;
+  }
+
+  .product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .product-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--white);
+  }
+
+  .product-weight {
+    font-size: 12px;
+    color: var(--cream-dim);
+  }
+
+  .product-btn {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--sage);
+    background: none;
+    border: 1px solid var(--sage-dim);
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .product-btn:hover {
+    background: var(--sage);
+    color: var(--black);
+    border-color: var(--sage);
+  }
+
+  /* ── ABOUT / STORY ── */
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 480px;
+  }
+
+  .story-left {
+    padding: 72px 48px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .story-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(44px, 5vw, 72px);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+  }
+
+  .story-heading em {
+    font-style: italic;
+    color: var(--sage);
+  }
+
+  .story-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--cream-dim);
+    max-width: 420px;
+  }
+
+  .story-right {
+    padding: 72px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .story-fact {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .story-fact:first-child { border-top: 1px solid var(--border); }
+
+  .fact-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--sage);
+    margin-bottom: 8px;
+  }
+
+  .fact-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.4;
+  }
+
+  /* ── PROCESS ── */
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .process-step {
+    padding: 48px;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+
+  .process-step:last-child { border-right: none; }
+
+  .step-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 24px;
+    letter-spacing: -0.04em;
+  }
+
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .step-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--cream-dim);
+  }
+
+  /* ── BUNDLES / OFFERS ── */
+  .bundles-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    min-height: 360px;
+  }
+
+  .bundle-featured {
+    background: var(--sage-dim);
+    padding: 56px 48px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bundle-featured::before {
+    content: 'ARDOR';
+    position: absolute;
+    bottom: -20px;
+    right: -10px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px;
+    font-weight: 300;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.08);
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .bundle-badge {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--cream);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 5px 12px;
+    margin-bottom: 24px;
+    width: fit-content;
+  }
+
+  .bundle-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .bundle-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(230,221,208,0.75);
+    max-width: 300px;
+    margin-bottom: 32px;
+  }
+
+  .bundle-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .bundle-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--white);
+  }
+
+  .bundle-old-price {
+    font-size: 18px;
+    color: rgba(230,221,208,0.4);
+    text-decoration: line-through;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .bundle-card {
+    padding: 48px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+
+  .bundle-card:hover { background: var(--surface); }
+  .bundle-card:last-child { border-right: none; }
+
+  .bundle-card-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--sage);
+    margin-bottom: 12px;
+  }
+
+  .bundle-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+  .bundle-card-desc {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--cream-dim);
+    margin-bottom: 32px;
+  }
+
+  .bundle-card-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--white);
+  }
+
+  /* ── NEWSLETTER ── */
+  .newsletter {
+    padding: 80px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .newsletter-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .newsletter-heading em {
+    font-style: italic;
+    color: var(--cream-dim);
+  }
+
+  .newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .newsletter-label {
+    font-size: 13px;
+    color: var(--cream-dim);
+    line-height: 1.6;
+  }
+
+  .input-row {
+    display: flex;
+    border: 1px solid var(--border);
+  }
+
+  .input-row input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 16px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--white);
+    font-weight: 300;
+  }
+
+  .input-row input::placeholder { color: var(--cream-dim); opacity: 0.5; }
+
+  .input-row button {
+    background: var(--sage);
+    border: none;
+    padding: 0 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--black);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .input-row button:hover { background: var(--white); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 56px 48px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 40px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-brand .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .footer-tagline {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--cream-dim);
+    line-height: 1.6;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .footer-col-title {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--sage);
+    margin-bottom: 20px;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 13px;
+    color: var(--cream-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--white); }
+
+  .footer-bottom {
+    grid-column: 1 / -1;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--cream-dim);
+    opacity: 0.5;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 24px 24px; }
+    .nav-links { display: none; }
+
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 120px 24px 60px; }
+
+    .products-grid { grid-template-columns: 1fr; }
+    .product-card { border-right: none; border-bottom: 1px solid var(--border); }
+
+    .story-grid { grid-template-columns: 1fr; }
+    .story-left { border-right: none; border-bottom: 1px solid var(--border); }
+
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .process-step:nth-child(2) { border-right: none; }
+    .process-step:nth-child(3) { border-top: 1px solid var(--border); }
+    .process-step:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
+
+    .bundles-grid { grid-template-columns: 1fr; }
+    .bundle-featured { border-right: none; border-bottom: 1px solid var(--border); }
+    .bundle-card { border-right: none; border-bottom: 1px solid var(--border); }
+
+    .newsletter { grid-template-columns: 1fr; gap: 32px; padding: 48px 24px; }
+    .section-header { padding: 48px 24px 32px; flex-direction: column; align-items: flex-start; gap: 16px; }
+
+    footer { grid-template-columns: 1fr 1fr; padding: 48px 24px 32px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">ARDOR</a>
+  <ul class="nav-links">
+    <li><a href="#products">Produk</a></li>
+    <li><a href="#story">Tentang</a></li>
+    <li><a href="#process">Proses</a></li>
+    <li><a href="#bundles">Penawaran</a></li>
+  </ul>
+  <a class="nav-cta" href="#products">Belanja Sekarang</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">ARDOR</div>
+
+  <div class="hero-left">
+    <span class="hero-label">Specialty Coffee — Sejak 2019</span>
+    <h1 class="hero-title">Rasa yang<br><em>tak terlupakan</em><br>dari setiap cangkir</h1>
+    <p class="hero-desc">
+      Biji pilihan dari kebun terbaik Nusantara. Dipanggang dengan presisi, 
+      diseduh dengan niat. Bukan sekadar kopi — ini pengalaman.
+    </p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#products">Jelajahi Koleksi</a>
+      <a class="btn-ghost" href="#story">Cerita Kami</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-visual">
+      <!-- SVG Coffee illustration -->
+      <svg class="coffee-cup-svg" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Steam lines -->
+        <path d="M70 40 Q75 28 70 18" stroke="#7A9E87" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+        <path d="M100 32 Q105 20 100 10" stroke="#7A9E87" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.4"/>
+        <path d="M130 40 Q125 28 130 18" stroke="#7A9E87" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+        <!-- Cup body -->
+        <path d="M42 70 L52 190 Q52 198 60 198 L140 198 Q148 198 148 190 L158 70 Z" fill="#1A1A16" stroke="#3D3D35" stroke-width="1"/>
+        <!-- Rim -->
+        <rect x="38" y="62" width="124" height="12" rx="2" fill="#242420" stroke="#3D3D35" stroke-width="1"/>
+        <!-- Coffee surface inside -->
+        <ellipse cx="100" cy="68" rx="58" ry="6" fill="#2A2420"/>
+        <!-- Handle -->
+        <path d="M148 110 Q175 110 175 140 Q175 170 148 170" stroke="#3D3D35" stroke-width="10" stroke-linecap="round" fill="none"/>
+        <path d="M148 115 Q168 115 168 140 Q168 165 148 165" stroke="#1A1A16" stroke-width="6" stroke-linecap="round" fill="none"/>
+        <!-- Latte art on surface -->
+        <path d="M80 68 Q100 56 120 68" stroke="#7A9E87" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <path d="M85 68 Q100 61 115 68" stroke="#7A9E87" stroke-width="0.8" fill="none" opacity="0.4"/>
+        <!-- Saucer -->
+        <ellipse cx="100" cy="206" rx="72" ry="10" fill="#131310" stroke="#3D3D35" stroke-width="1"/>
+        <ellipse cx="100" cy="204" rx="52" ry="6" fill="#1A1A16" stroke="#242420" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-row">
+        <span class="stat-label">Kebun Mitra</span>
+        <span class="stat-num">24</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Varian Tersedia</span>
+        <span class="stat-num">16</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Pelanggan Setia</span>
+        <span class="stat-num">8k+</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-band">
+  <div class="marquee-track">
+    <span class="marquee-item">Single Origin</span>
+    <span class="marquee-item marquee-dot">◆</span>
+    <span class="marquee-item">Specialty Grade</span>
+    <span class="marquee-item marquee-dot">◆</span>
+    <span class="marquee-item">Flores Bajawa</span>
+    <span class="marquee-item marquee-dot">◆</span>
+    <span class="marquee-item">Aceh Gayo</span>
+    <span class="marquee-item marquee-dot">◆</span>
+    <span class="marquee-item">Toraja Sapan</span>
+    <span class="marquee-item marquee-dot">◆</span>
+    <span class="marquee-item">Ethically Sourced</span>
+    <span class="marquee-item marquee-dot">◆</span>
+    <span class="marquee-item">Fresh Roasted</span>
+    <span class="marquee-item marquee-dot">◆</span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">Single Origin</span>
+    <span class="marquee-item marquee-dot">◆</span>
+    <span class="marquee-item">Specialty Grade</span>
+    <span class="marquee-item marquee-dot">◆</span>
+    <span class="marquee-item">Flores Bajawa</span>
+    <span class="marquee-item marquee-dot">◆</span>
+    <span class="marquee-item">Aceh Gayo</span>
+    <span class="marquee-item marquee-dot">◆</span>
+    <span class="marquee-item">Toraja Sapan</span>
+    <span class="marquee-item marquee-dot">◆</span>
+    <span class="marquee-item">Ethically Sourced</span>
+    <span class="marquee-item marquee-dot">◆</span>
+    <span class="marquee-item">Fresh Roasted</span>
+    <span class="marquee-item marquee-dot">◆</span>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="section-header">
+    <div>
+      <div class="section-num">01 — Koleksi</div>
+      <h2 class="section-title">Biji Pilihan Kami</h2>
+    </div>
+    <a class="section-link" href="#">Lihat Semua →</a>
+  </div>
+
+  <div class="products-grid">
+    <!-- Card 1 -->
+    <div class="product-card">
+      <div class="product-visual">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="38" stroke="#3D3D35" stroke-width="1"/>
+          <ellipse cx="60" cy="60" rx="24" ry="28" fill="#1A1A16" stroke="#3D3D35" stroke-width="1"/>
+          <path d="M60 32 Q68 60 60 88" stroke="#7A9E87" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M60 32 Q52 60 60 88" stroke="#7A9E87" stroke-width="1" fill="none" opacity="0.5"/>
+          <circle cx="60" cy="60" r="6" fill="#3D3D35"/>
+        </svg>
+      </div>
+      <div class="product-origin">ACEH TENGAH — GAYO</div>
+      <div class="product-name">Gayo Honey Process</div>
+      <div class="product-variety">Typica × Bourbon</div>
+      <div class="product-notes">
+        <span class="note-tag">Peach</span>
+        <span class="note-tag">Brown Sugar</span>
+        <span class="note-tag">Lychee</span>
+      </div>
+      <div class="product-footer">
+        <div>
+          <div class="product-price">Rp 95.000</div>
+          <div class="product-weight">200g</div>
+        </div>
+        <button class="product-btn">Tambah</button>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="product-card">
+      <div class="product-visual">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="22" y="22" width="76" height="76" stroke="#3D3D35" stroke-width="1" transform="rotate(12 60 60)"/>
+          <ellipse cx="60" cy="60" rx="24" ry="28" fill="#1A1A16" stroke="#3D3D35" stroke-width="1"/>
+          <path d="M60 32 Q68 60 60 88" stroke="#7A9E87" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M60 32 Q52 60 60 88" stroke="#7A9E87" stroke-width="1" fill="none" opacity="0.5"/>
+          <circle cx="60" cy="60" r="6" fill="#3D3D35"/>
+        </svg>
+      </div>
+      <div class="product-origin">FLORES — BAJAWA</div>
+      <div class="product-name">Bajawa Natural</div>
+      <div class="product-variety">S795 × Linie S</div>
+      <div class="product-notes">
+        <span class="note-tag">Dark Chocolate</span>
+        <span class="note-tag">Cherry</span>
+        <span class="note-tag">Earthy</span>
+      </div>
+      <div class="product-footer">
+        <div>
+          <div class="product-price">Rp 110.000</div>
+          <div class="product-weight">200g</div>
+        </div>
+        <button class="product-btn">Tambah</button>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="product-card">
+      <div class="product-visual">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="60,16 104,88 16,88" stroke="#3D3D35" stroke-width="1" fill="none"/>
+          <ellipse cx="60" cy="62" rx="24" ry="28" fill="#1A1A16" stroke="#3D3D35" stroke-width="1"/>
+          <path d="M60 34 Q68 62 60 90" stroke="#7A9E87" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M60 34 Q52 62 60 90" stroke="#7A9E87" stroke-width="1" fill="none" opacity="0.5"/>
+          <circle cx="60" cy="62" r="6" fill="#3D3D35"/>
+        </svg>
+      </div>
+      <div class="product-origin">SULAWESI — TORAJA</div>
+      <div class="product-name">Toraja Sapan Village</div>
+      <div class="product-variety">Typica Heritage</div>
+      <div class="product-notes">
+        <span class="note-tag">Caramel</span>
+        <span class="note-tag">Dark Fruit</span>
+        <span class="note-tag">Spice</span>
+      </div>
+      <div class="product-footer">
+        <div>
+          <div class="product-price">Rp 125.000</div>
+          <div class="product-weight">200g</div>
+        </div>
+        <button class="product-btn">Tambah</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="story-grid">
+    <div class="story-left">
+      <h2 class="story-heading">Kopi adalah<br><em>bahasa</em><br>yang universal</h2>
+      <p class="story-body">
+        ARDOR lahir dari keyakinan sederhana: kopi terbaik berasal dari 
+        hubungan yang tulus — antara petani, biji, dan orang yang menyeduhnya. 
+        Kami terbang langsung ke kebun, memilih dengan tangan, dan memanggang 
+        dalam batch kecil agar setiap biji sampai kepada kamu dalam kondisi 
+        paling hidup.<br><br>
+        Tidak ada perantara. Tidak ada kompromi.
+      </p>
+    </div>
+    <div class="story-right">
+      <div class="story-fact">
+        <div class="fact-label">FILOSOFI</div>
+        <div class="fact-text">Setiap biji punya cerita. Tugas kami mengantarkannya tanpa distorsi.</div>
+      </div>
+      <div class="story-fact">
+        <div class="fact-label">SOURCING</div>
+        <div class="fact-text">Direct trade dengan 24 petani mitra di 8 provinsi seluruh Indonesia.</div>
+      </div>
+      <div class="story-fact">
+        <div class="fact-label">ROASTING</div>
+        <div class="fact-text">Dipanggang tiap hari Senin dan Kamis. Dikirim maksimal 72 jam setelah roast.</div>
+      </div>
+      <div class="story-fact">
+        <div class="fact-label">STANDAR</div>
+        <div class="fact-text">Minimum skor 84 pada skala SCA. Hanya yang lolos masuk ke katalog kami.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-header">
+    <div>
+      <div class="section-num">02 — Proses</div>
+      <h2 class="section-title">Dari Kebun ke Tanganmu</h2>
+    </div>
+  </div>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="step-number">01</div>
+      <div class="step-title">Seleksi Kebun</div>
+      <div class="step-desc">Kami kunjungi langsung. Tanah, ketinggian, cara petik — semuanya dievaluasi sebelum kontrak ditandatangani.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-number">02</div>
+      <div class="step-title">Panen Selektif</div>
+      <div class="step-desc">Hanya cherry merah yang dipetik. Tidak ada kompromi pada waktu panen meski itu berarti lebih lama dan lebih mahal.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-number">03</div>
+      <div class="step-title">Roasting Presisi</div>
+      <div class="step-desc">Mesin Probat 15kg dengan profil yang diprogram secara spesifik per origin. Light hingga medium-dark sesuai karakter biji.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-number">04</div>
+      <div class="step-title">Kirim Segar</div>
+      <div class="step-desc">Rest 24–48 jam pasca-roast, lalu langsung dikemas vakum dan dikirim. Kamu minum di puncak rasa.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BUNDLES -->
+<section id="bundles">
+  <div class="section-header">
+    <div>
+      <div class="section-num">03 — Penawaran</div>
+      <h2 class="section-title">Paket & Langganan</h2>
+    </div>
+    <a class="section-link" href="#">Semua Paket →</a>
+  </div>
+  <div class="bundles-grid">
+    <div class="bundle-featured">
+      <div>
+        <span class="bundle-badge">TERLARIS</span>
+        <div class="bundle-name">The Explorer<br>Bundle</div>
+        <p class="bundle-desc">Tiga origin berbeda dalam satu paket. Cocok untuk kamu yang masih mencari favorit, atau ingin memperkenalkan seseorang pada dunia specialty.</p>
+      </div>
+      <div>
+        <div class="bundle-price-row">
+          <span class="bundle-price">Rp 270.000</span>
+          <span class="bundle-old-price">Rp 330.000</span>
+        </div>
+        <a class="btn-primary" href="#" style="display:inline-block; text-align:center;">Pesan Sekarang</a>
+      </div>
+    </div>
+    <div class="bundle-card">
+      <div>
+        <div class="bundle-card-label">LANGGANAN</div>
+        <div class="bundle-card-name">Monthly Subscription</div>
+        <p class="bundle-card-desc">Dua bungkus 200g dikirim tiap bulan. Origin berganti sesuai musim panen. Hemat 20% dari harga normal.</p>
+      </div>
+      <div>
+        <div class="bundle-card-price">Rp 160.000<span style="font-size:16px; color:var(--cream-dim)">/bulan</span></div>
+      </div>
+    </div>
+    <div class="bundle-card">
+      <div>
+        <div class="bundle-card-label">HADIAH</div>
+        <div class="bundle-card-name">Gift Set Premium</div>
+        <p class="bundle-card-desc">Dua bungkus 200g dalam kotak kayu, dilengkapi tasting notes dan kartu personal. Siap kirim tanpa perlu dibungkus lagi.</p>
+      </div>
+      <div>
+        <div class="bundle-card-price">Rp 320.000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section>
+  <div class="newsletter">
+    <h2 class="newsletter-heading">Jadilah yang pertama<br>tahu saat <em>batch baru</em><br>tiba dari kebun</h2>
+    <div class="newsletter-form">
+      <p class="newsletter-label">Kami kirim update roast baru, cerita dari petani, dan penawaran eksklusif. Tidak ada spam — hanya kopi.</p>
+      <div class="input-row">
+        <input type="email" placeholder="email kamu">
+        <button type="button">DAFTAR</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="logo">ARDOR</div>
+    <div class="footer-tagline">Specialty coffee dari bumi<br>Nusantara, untuk meja kamu.</div>
+  </div>
+  <div>
+    <div class="footer-col-title">PRODUK</div>
+    <ul class="footer-links">
+      <li><a href="#">Single Origin</a></li>
+      <li><a href="#">Blend Signature</a></li>
+      <li><a href="#">Cold Brew Kit</a></li>
+      <li><a href="#">Gift Set</a></li>
+      <li><a href="#">Subscription</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-title">INFO</div>
+    <ul class="footer-links">
+      <li><a href="#">Tentang Ardor</a></li>
+      <li><a href="#">Proses Roasting</a></li>
+      <li><a href="#">Kebun Mitra</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Kontak</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-title">BANTUAN</div>
+    <ul class="footer-links">
+      <li><a href="#">Cara Memesan</a></li>
+      <li><a href="#">Pengiriman</a></li>
+      <li><a href="#">Kebijakan Retur</a></li>
+      <li><a href="#">FAQ</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Ardor Coffee Roasters. Semua hak dilindungi.</span>
+    <span class="footer-copy">Jakarta, Indonesia</span>
+  </div>
+</footer>
+
+</body>
+</html>
